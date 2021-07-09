@@ -67,7 +67,7 @@
           <!--定位-->
           <bm-geolocation anchor="BMAP_ANCHOR_BOTTOM_RIGHT" :showAddressBar="true" :autoLocation="true"></bm-geolocation>
           <!--点-->
-          <bm-marker v-for="item in map.markers" :position="{lng: item.lng, lat: item.lat}" :dragging="map.dragging" animation="BMAP_ANIMATION_DROP" @click="lookDetail(item)">
+          <bm-marker v-for="item in map.markers" :key="item.id" :position="{lng: item.lng, lat: item.lat}" :dragging="map.dragging" animation="BMAP_ANIMATION_DROP" @click="lookDetail(item)">
             <!--提示信息-->
             <bm-info-window :title="map.infoWindow.info.title" :position="{lng: map.infoWindow.info.lng, lat: map.infoWindow.info.lat}"   :show="item.showFlag" @close="infoWindowClose(item)" @open="infoWindowOpen(item)">
             </bm-info-window>

@@ -40,7 +40,7 @@
         size="middle"
         rowKey="id"
         :columns="columns"
-        :dataSource="data"
+        :dataSource="dataSource"
         :pagination="ipagination"
         :loading="loading"
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
@@ -163,6 +163,8 @@ import {getuserlist} from '@/api/user.js'
     methods: {
 	// 测试方法
 	getlist(){
+    console.log('ces')
+
 		getuserlist().then(res=>{
 			this.data=res.result.records;
 			console.log(this.data)

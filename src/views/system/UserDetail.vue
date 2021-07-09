@@ -115,7 +115,7 @@
               :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
               @change="handleTableChange"
               style="margin:20px 0px">
-              <template slot="avatarslot" slot-scope="text, record, index">
+              <template slot="avatarslot" slot-scope="text, record">
                 <div class="anty-img-wrap">
                   <a-avatar shape="square" :src="getAvatarView(record.avatar)" icon="user"/>
                 </div>
@@ -147,7 +147,7 @@
               :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
               @change="handleTableChange">
 
-              <template slot="avatarslot" slot-scope="text, record, index">
+              <template slot="avatarslot" slot-scope="text, record">
                 <div class="anty-img-wrap">
                   <a-avatar shape="square" :src="getAvatarView(record.avatar)" icon="user"/>
                 </div>
@@ -196,7 +196,7 @@
     data() {
       return {
         description: '用户详情界面',
-         searchdate:'',
+        searchdate:this.$route.query.msgKey,
         queryParam: {},
         recycleBinVisible: false,
         url: {
@@ -288,26 +288,21 @@
       },
       
       // 获取信息userTag
-      // getinfo(){
-      //   let num=86;
-      //   getuserinfo(num).then(res=>{
-      //     this.datedetail=res.result;
-      //     var strphone=res.result.qinqingHao;
-      //     this.phonenumber=strphone.split(",");
-      //     var struserTag=res.result.userTag;
-      //     this.userTag=struserTag.split(",");
-      //   })
-      // },
-
        getinfo(){
-        getuserinfo().then(res=>{
-          this.datedetail=res.result;
-          var strphone=res.result.qinqingHao;
-          this.phonenumber=strphone.split(",");
-          var struserTag=res.result.userTag;
-          this.userTag=struserTag.split(",");
+         if(this.searchdate){
+           this.searchform();
+         }else{
+           getuserinfo().then(res=>{
+            this.datedetail=res.result;
+            var strphone=res.result.qinqingHao;
+            this.phonenumber=strphone.split(",");
+            var struserTag=res.result.userTag;
+            this.userTag=struserTag.split(",");
         })
+         }
       },
+
+      // 获取首页传递过来的电话号码
       // 下发短信
       handleDelete(id){
         console.log(id)

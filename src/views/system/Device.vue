@@ -117,7 +117,7 @@
         <span v-if='record===3'>在线</span>
         </span>
 
-        <template slot="avatarslot" slot-scope="text, record, index">
+        <template slot="avatarslot" slot-scope="text, record">
           <div class="anty-img-wrap">
             <a-avatar shape="square" :src="getAvatarView(record.avatar)" icon="user"/>
           </div>

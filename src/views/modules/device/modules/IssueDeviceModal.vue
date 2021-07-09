@@ -31,7 +31,7 @@
             v-model="selectedRole"
             :getPopupContainer= "(target) => target.parentNode">
             <a-select-option v-for="(role,roleindex) in roleList" :key="roleindex.toString()" :value="role.id">
-              {{ role.name }}（{{role.sn}}）
+              {{ role.name }}（{{role.sn}}
             </a-select-option>
           </a-select>
         </a-form-item>

@@ -16,7 +16,7 @@
           :menus="menus"
           @menuSelect="menuSelect"
           :theme="navTheme"
-          :collapsed="false"
+          :collapsed="true"
           :collapsible="true"></side-menu>
       </a-drawer>
 
@@ -45,7 +45,7 @@
           :menus="menus"
           @menuSelect="menuSelect"
           :theme="navTheme"
-          :collapsed="false"
+          :collapsed="true"
           :collapsible="true"></side-menu>
       </a-drawer>
     </template>
@@ -108,7 +108,7 @@
     mixins: [mixin, mixinDevice],
     data() {
       return {
-        collapsed: false,
+        collapsed: true,
         activeMenu:{},
         menus: []
       }
