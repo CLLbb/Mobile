@@ -444,7 +444,7 @@
         transition: color .3s;
 
         &:hover {
-          color: #1890ff;
+          color: #3154ef;
         }
       }
 

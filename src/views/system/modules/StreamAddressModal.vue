@@ -20,11 +20,17 @@
 
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
-        <a-form-item label="名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input placeholder="请输入名称" v-decorator.trim="['name', validatorRules.name]" />
+        <a-form-item label="摄像头名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入摄像头名称" v-decorator.trim="['deviceName', validatorRules.deviceName]" />
         </a-form-item>
-        <a-form-item label="地址" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input placeholder="请输入地址" v-decorator="['addr', validatorRules.addr]" />
+        <a-form-item label="摄像头安装位置" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入摄像头安装位置" v-decorator="['devicePosition', validatorRules.devicePosition]" />
+        </a-form-item>
+        <a-form-item label="webRtcStreamer地址" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入webRtcStreamer地址" v-decorator="['webrtcstreamerAddr', validatorRules.webrtcstreamerAddr]" />
+        </a-form-item>
+        <a-form-item label="rtsp流地址" :labelCol="labelCol" :wrapperCol="wrapperCol" disabled>
+          <a-input placeholder="请输入rtsp流地址" v-decorator="['rtspIp', validatorRules.rtspIp]" />
         </a-form-item>
 
        
@@ -217,8 +223,10 @@ export default {
         that.form.setFieldsValue(
           pick(
             this.model,
-            'name',
-            'addr',
+            'deviceName',
+            'devicePosition',
+            'webrtcstreamerAddr',
+            'rtspIp',
             'post'
           )
         )

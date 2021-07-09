@@ -855,7 +855,7 @@
             border-bottom: 1px solid #e6ebf5!important;
           }
           .ant-tabs-tab-active.ant-tabs-tab{
-            color: #409eff;
+            color: #3154ef;
             background-color: #fff!important;
             border-right:1px solid #e6ebf5!important;
             border-left:1px solid #e6ebf5!important;

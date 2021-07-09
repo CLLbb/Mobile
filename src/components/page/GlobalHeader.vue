@@ -192,7 +192,7 @@
       z-index: 2;
       color: white;
       height: @height;
-      background-color: @primary-color;
+      background-color:#3154ef;
       transition: background 300ms;
 
       /* dark 样式 */

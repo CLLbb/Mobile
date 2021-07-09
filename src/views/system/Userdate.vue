@@ -24,14 +24,20 @@
     <a-row :gutter="24">
       <a-col :md="14" :sm="14">
         <p class="title1">实时监控</p>
-        <div class="station">
+        <!-- <div class="station">
           <template v-for="(playRow,index) of FlvPlayerList">
             <div :class="'children'+index" v-if="playRow.url" :key="index">
               <span>{{ playRow.title }}</span>
               <VueXgplayer :config="playRow" format="flv" @player="FlvPlayer = $event" />
             </div>
           </template>
-        </div>
+        </div> -->
+        <div>
+		<iframe frameborder="no" border="0" style="width:400px;height:300px;margin-right:20px" name="ddddd" id="iframes" scrolling="auto" src="/static/test.html?data=rtsp://192.168.1.111/live/mainstream"></iframe>
+		<iframe frameborder="no" border="0" style="width:400px;height:300px;" name="ddddd" id="iframes" scrolling="auto" src="/static/test.html?data=rtsp://192.168.1.112/live/mainstream"></iframe>
+		<iframe frameborder="no" border="0" style="width:400px;height:300px;" name="ddddd" id="iframes" scrolling="auto" src="/static/test.html?data=rtsp://192.168.1.114/live/mainstream"></iframe>
+		<iframe frameborder="no" border="0" style="width:400px;height:300px;" name="ddddd" id="iframes" scrolling="auto" src="/static/test.html?data=rtsp://192.168.1.135/live/mainstream"></iframe>
+	</div>
       </a-col>
 
       <a-col :md="10" :sm="10">
@@ -66,11 +72,17 @@
 
            <!-- 测试 -->
            <!-- <a-row :gutter="24">
-                <a-carousel autoplay  style="background-color:#ccc;margin:0px 20px 20px 20px">
-                   <div class="imgslide" v-for="item in userInfoList" :key="item.id">
-                    <img :src="getAvatarView(item.avatar)" class="bottom_img" />
+                <div id="content">
+                    <ul >
+                        <li v-for="item in userInfoList" :key="item.id" @click="gotodetail(item.phone)">   
+                         <img :src="getAvatarView(item.avatar)" class="bottom_img" />
+                        </li> 
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                    </ul>
                 </div>
-                </a-carousel>
             </a-row> -->
             <!-- 测试 -->
       <!--    <marquee-text>-->
@@ -143,43 +155,6 @@ export default {
         importExcelUrl: 'sys/user/importExcel',
         positiveLeave: 'sys/user/positiveOrLeave'
       },
-      // 视频数据
-      configFlv: {
-        id: 'vs1',
-        url: 'http://192.168.1.104/live2?port=9999&app=http_flv&stream=test',
-        width: 400,
-        height: 300,
-        volume: 0.6,
-        autoplay: true
-      },
-      FlvPlayer: null,
-
-      configFlv2: {
-        id: 'vs2',
-        url: 'http://192.168.1.104/live2?port=9998&app=http_flv&stream=test',
-        width: 400,
-        height: 300,
-        volume: 0.6,
-        autoplay: true
-      },
-
-      configFlv3: {
-        id: 'vs3',
-        url: 'http://192.168.1.104/live3?port=9997&app=http_flv&stream=test',
-        width: 400,
-        height: 300,
-        volume: 0.6,
-        autoplay: true
-      },
-
-      configFlv4: {
-        id: 'vs4',
-        url: 'http://192.168.1.104/live3?port=9996&app=http_flv&stream=test',
-        width: 400,
-        height: 300,
-        volume: 0.6,
-        autoplay: true
-      },
     
       timer: null,
       timer2: null,
@@ -202,8 +177,39 @@ export default {
     this.getimg()
     this.getinfo2()
     this.getaddress()
+    this.loadImgscoll()
   },
   methods: {
+    // 滚动部分js
+     loadImgscoll() {
+     var content = document.getElementById("content")
+     var ul = content.getElementsByTagName("ul")[0]
+     var li = ul.getElementsByTagName("li")
+     var speed = 1;
+
+     ul.innerHTML += ul.innerHTML
+     ul.style.width = li.length * li[0].offsetWidth + "px"
+
+     function run() {
+         if (ul.offsetLeft < -ul.offsetWidth / 2) {
+             ul.style.left = 0
+         } else if (ul.offsetLeft > 0) {
+             ul.style.left = -ul.offsetWidth / 2 + "px"
+         }
+
+         ul.style.left = ul.offsetLeft + speed + "px"
+     }
+     timer = setInterval(run, 30)
+
+     content.onmouseover = function() {
+         clearInterval(timer)
+     }
+
+     content.onmouseout = function() {
+         timer = setInterval(run, 30)
+     }
+
+ },
     // 视频流地址
     getaddress() {
       getAddressList().then(res => {
@@ -405,5 +411,57 @@ export default {
 
 .img {
   text-align: center;
+}
+/* 滚动部分样式 */
+ #content ul li{
+	margin:0;
+	padding:0;
+	list-style:none;
+	float:left
+}
+#content {
+	width:1000px;
+	height:300px;
+	position:relative;
+	overflow:hidden
+}
+#content ul {
+	width:1000px;
+	height:300px;
+	position:absolute
+}
+#content ul li {
+	width:200px;
+	height:300px;
+}
+#content ul li:nth-of-type(1) {
+	background:yellow
+}
+#content ul li:nth-of-type(2) {
+	background:turquoise
+}
+#content ul li:nth-of-type(3) {
+	background:navajowhite
+}
+#content ul li:nth-of-type(4) {
+	background:darkblue
+}
+#content ul li:nth-of-type(5) {
+	background:black
+}
+#content ul li:nth-of-type(6) {
+	background:yellow
+}
+#content ul li:nth-of-type(7) {
+	background:turquoise
+}
+#content ul li:nth-of-type(8) {
+	background:navajowhite
+}
+#content ul li:nth-of-type(9) {
+	background:darkblue
+}
+#content ul li:nth-of-type(10) {
+	background:black
 }
 </style>

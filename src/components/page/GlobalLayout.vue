@@ -332,7 +332,7 @@
 
           .avatar {
             margin: 20px 10px 20px 0;
-            color: #1890ff;
+            color: #3154ef;
             background: hsla(0, 0%, 100%, .85);
             vertical-align: middle;
           }

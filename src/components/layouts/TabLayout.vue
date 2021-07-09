@@ -392,7 +392,7 @@
       border-bottom: 1px solid transparent !important;
     }
     .ant-tabs-tab-active {
-      border-color: @primary-color!important;
+      border-color: #3154ef!important;
     }
   }
 

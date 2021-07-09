@@ -60,6 +60,18 @@ export function deviceList() {
   })
 }
 
+// 获取设备列表客户列表中
+export function deviceListUser() {
+  return axios({
+    url: '/operate/device/list',
+    method: 'get',
+    params:{
+      status:3,
+      type:2
+    }
+  })
+}
+
 // 获取图片信息
 export function getImgList() {
   return axios({

@@ -1,4 +1,4 @@
-@primary-color: #1890ff;
+@primary-color: #3154ef;
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable */
@@ -1375,7 +1375,7 @@ this.tinycolor = tinycolor;
 @blue-3: color(~`colorPalette("@{blue-6}", 3)`);
 @blue-4: color(~`colorPalette("@{blue-6}", 4)`);
 @blue-5: color(~`colorPalette("@{blue-6}", 5)`);
-@blue-6: #1890ff;
+@blue-6: #3154ef;
 @blue-7: color(~`colorPalette("@{blue-6}", 7)`);
 @blue-8: color(~`colorPalette("@{blue-6}", 8)`);
 @blue-9: color(~`colorPalette("@{blue-6}", 9)`);
@@ -1529,16 +1529,16 @@ this.tinycolor = tinycolor;
 
 // Color used by default to control hover and active backgrounds and for
 // alert info backgrounds.
-@primary-1: color(~`colorPalette("@{primary-color}", 1)`);  // replace tint(@primary-color, 90%)
-@primary-2: color(~`colorPalette("@{primary-color}", 2)`);  // replace tint(@primary-color, 80%)
-@primary-3: color(~`colorPalette("@{primary-color}", 3)`);  // unused
-@primary-4: color(~`colorPalette("@{primary-color}", 4)`);  // unused
-@primary-5: color(~`colorPalette("@{primary-color}", 5)`);  // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
-@primary-6: @primary-color;                                 // color used to control the text color of active buttons, don't use, use @primary-color
-@primary-7: color(~`colorPalette("@{primary-color}", 7)`);  // replace shade(@primary-color, 5%)
-@primary-8: color(~`colorPalette("@{primary-color}", 8)`);  // unused
-@primary-9: color(~`colorPalette("@{primary-color}", 9)`);  // unused
-@primary-10: color(~`colorPalette("@{primary-color}", 10)`);  // unused
+@primary-1: color(~`colorPalette("#3154ef", 1)`);  // replace tint(@primary-color, 90%)
+@primary-2: color(~`colorPalette("#3154ef", 2)`);  // replace tint(@primary-color, 80%)
+@primary-3: color(~`colorPalette("#3154ef", 3)`);  // unused
+@primary-4: color(~`colorPalette("#3154ef", 4)`);  // unused
+@primary-5: color(~`colorPalette("#3154ef", 5)`);  // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
+@primary-6: #3154ef;                                 // color used to control the text color of active buttons, don't use, use @primary-color
+@primary-7: color(~`colorPalette("#3154ef", 7)`);  // replace shade(@primary-color, 5%)
+@primary-8: color(~`colorPalette("#3154ef", 8)`);  // unused
+@primary-9: color(~`colorPalette("#3154ef", 9)`);  // unused
+@primary-10: color(~`colorPalette("#3154ef", 10)`);  // unused
 
 // Base Scaffolding Variables
 // ---
@@ -1582,7 +1582,7 @@ this.tinycolor = tinycolor;
 @iconfont-css-prefix    : anticon;
 
 // LINK
-@link-color             : @primary-color;
+@link-color             : #3154ef;
 @link-hover-color       : color(~`colorPalette("@{link-color}", 5)`);
 @link-active-color      : color(~`colorPalette("@{link-color}", 7)`);
 @link-decoration        : none;
@@ -2176,7 +2176,7 @@ this.tinycolor = tinycolor;
   color: rgba(0, 0, 0, 0.45);
 }
 .layout .header {
-  background-color: @primary-color !important;
+  background-color:#3154ef !important;
 }
 i.trigger:hover {
   background: rgba(0, 0, 0, 0.025);
@@ -2352,7 +2352,7 @@ i.trigger:hover {
   background-color: white;
 }
 .sider.light .logo {
-  background-color: @primary-color !important;
+  background-color: #3154ef !important;
   box-shadow: 1px 1px 0 0 #e8e8e8;
 }
 .sider.light .logo h1 {
@@ -2878,8 +2878,8 @@ mark {
 }
 .ant-btn-primary {
   color: #fff;
-  background-color: @primary-color;
-  border-color: @primary-color;
+  background-color:#3154ef;
+  border-color:#3154ef;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.035);
 }
 .ant-btn-primary > a:only-child {
@@ -5298,7 +5298,7 @@ form .ant-upload {
 .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
 .ant-menu-submenu-active,
 .ant-menu-submenu-title:hover {
-  color: @primary-color;
+  color: #3154ef;
 }
 .ant-menu-horizontal > .ant-menu-item:hover,
 .ant-menu-horizontal > .ant-menu-item-active,
@@ -5306,14 +5306,14 @@ form .ant-upload {
   background-color: transparent;
 }
 .ant-menu-item-selected {
-  color: @primary-color;
+  color: #3154ef;
 }
 .ant-menu-item-selected > a,
 .ant-menu-item-selected > a:hover {
-  color: @primary-color;
+  color: #3154ef;
 }
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background-color: color(~`colorPalette("@{primary-color}", 1)`);
+  background-color: color(~`colorPalette("@{#3154ef}", 1)`);
 }
 .ant-menu-inline,
 .ant-menu-vertical,
@@ -5368,17 +5368,17 @@ form .ant-upload {
 .ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before,
 .ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before,
 .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before {
-  background: linear-gradient(to right, @primary-color, @primary-color);
+  background: linear-gradient(to right, #3154ef, @primary-color);
 }
 .ant-menu-vertical .ant-menu-submenu-selected,
 .ant-menu-vertical-left .ant-menu-submenu-selected,
 .ant-menu-vertical-right .ant-menu-submenu-selected {
-  color: @primary-color;
+  color:#3154ef;
 }
 .ant-menu-vertical .ant-menu-submenu-selected > a,
 .ant-menu-vertical-left .ant-menu-submenu-selected > a,
 .ant-menu-vertical-right .ant-menu-submenu-selected > a {
-  color: @primary-color;
+  color: #3154ef;
 }
 .ant-menu-horizontal {
   border: 0;
@@ -5397,23 +5397,23 @@ form .ant-upload {
 .ant-menu-horizontal > .ant-menu-submenu-open,
 .ant-menu-horizontal > .ant-menu-item-selected,
 .ant-menu-horizontal > .ant-menu-submenu-selected {
-  border-bottom: 2px solid @primary-color;
-  color: @primary-color;
+  border-bottom: 2px solid#3154ef;
+  color: #3154ef;
 }
 .ant-menu-horizontal > .ant-menu-item > a {
   color: rgba(0, 0, 0, 0.65);
 }
 .ant-menu-horizontal > .ant-menu-item > a:hover {
-  color: @primary-color;
+  color:#3154ef;
 }
 .ant-menu-horizontal > .ant-menu-item-selected > a {
-  color: @primary-color;
+  color: #3154ef;
 }
 .ant-menu-vertical .ant-menu-item:after,
 .ant-menu-vertical-left .ant-menu-item:after,
 .ant-menu-vertical-right .ant-menu-item:after,
 .ant-menu-inline .ant-menu-item:after {
-  border-right: 3px solid @primary-color;
+  border-right: 3px solid #3154ef;
 }
 .ant-menu-inline-collapsed-tooltip a {
   color: rgba(255, 255, 255, 0.85);
@@ -5554,7 +5554,7 @@ form .ant-upload {
 }
 .ant-menu.ant-menu-dark .ant-menu-item-selected,
 .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
-  background-color: @primary-color;
+  background-color: #3154ef;
 }
 .ant-menu-dark .ant-menu-item-disabled,
 .ant-menu-dark .ant-menu-submenu-disabled,
@@ -5591,7 +5591,7 @@ form .ant-upload {
 }
 .ant-message-info .anticon,
 .ant-message-loading .anticon {
-  color: @primary-color;
+  color: #3154ef;
 }
 .ant-modal {
   color: rgba(0, 0, 0, 0.65);
@@ -6805,8 +6805,8 @@ tr.ant-table-expanded-row:hover {
 }
 .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
   background: #fff;
-  border-color: @primary-color !important;
-  color: @primary-color;
+  border-color: #3154ef !important;
+  color: #3154ef;
 }
 .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab .ant-tabs-close-x {
   color: rgba(0, 0, 0, 0.45);
@@ -6840,13 +6840,13 @@ tr.ant-table-expanded-row:hover {
   border-radius: 0 0 4px 4px;
 }
 .ant-tabs.ant-tabs-card.ant-tabs-bottom > .ant-tabs-bar .ant-tabs-tab-active {
-  color: @primary-color;
+  color: #3154ef;
 }
 .ant-tabs {
   color: rgba(0, 0, 0, 0.65);
 }
 .ant-tabs-ink-bar {
-  background-color: @primary-color;
+  background-color:#3154ef;
 }
 .ant-tabs-bar {
   border-bottom: 1px solid #e8e8e8;
@@ -6879,7 +6879,7 @@ tr.ant-table-expanded-row:hover {
   color: color(~`colorPalette("@{primary-color}", 7)`);
 }
 .ant-tabs-nav .ant-tabs-tab-active {
-  color: @primary-color;
+  color: #3154ef;
 }
 .ant-tabs-vertical > .ant-tabs-bar {
   border-bottom: 0;
@@ -7714,5 +7714,5 @@ font.weak {
 
 // TESTA-521
 .tab-layout-tabs.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
-  border-color: @primary-color !important;
+  border-color: #3154ef !important;
 }

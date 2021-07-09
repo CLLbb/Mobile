@@ -148,22 +148,27 @@
         recycleBinVisible: false,
         columns: [
           {
-            title: '名称',
+            title: '设备名称',
             align: "center",
             width: 80,
-            dataIndex: 'name',
+            dataIndex: 'deviceName',
           },
-        //   {
-        //     title: '头像',
-        //     align: "center",
-        //     dataIndex: 'avatar',
-        //     scopedSlots: {customRender: "avatarslot"}
-        //   },
           {
-            title: '地址名称',
+            title: '设备位置',
+            align: "center",
+            dataIndex: 'devicePosition',
+          },
+          {
+            title: '流服务地址',
             align: "center",
             // width: 100,
-            dataIndex: 'addr'
+            dataIndex: 'webrtcstreamerAddr'
+          },
+          {
+            title: '推流地址',
+            align: "center",
+            // width: 100,
+            dataIndex: 'rtspIp'
           },
           {
             title: '操作',

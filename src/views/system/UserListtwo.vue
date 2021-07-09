@@ -128,7 +128,7 @@
   import SysUserAgentModal from "./modules/Drop";
   import JInput from '@/components/panther/JInput'
   import UserRecycleBinModal from './modules/UserRecycleBinModal'
-  import {deviceList,getVisiterlist,IssureAll} from '@/api/user'
+  import {deviceListUser,getVisiterlist,IssureAll} from '@/api/user'
 
   export default {
     name: "UserList",
@@ -306,7 +306,7 @@
 
       // 获取设备列表
       deviceList2(){
-        deviceList().then(res=>{
+        deviceListUser().then(res=>{
           this.roleList=res.result.records;
         })
       },

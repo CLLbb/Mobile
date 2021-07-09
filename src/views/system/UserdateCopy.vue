@@ -24,14 +24,20 @@
     <a-row :gutter="24">
       <a-col :md="14" :sm="14">
         <p class="title1">实时监控</p>
-        <div class="station">
+        <!-- <div class="station">
           <template v-for="(playRow,index) of FlvPlayerList">
             <div :class="'children'+index" v-if="playRow.url" :key="index">
               <span>{{ playRow.title }}</span>
               <VueXgplayer :config="playRow" format="flv" @player="FlvPlayer = $event" />
             </div>
           </template>
-        </div>
+        </div> -->
+        <div>
+		<iframe frameborder="no" border="0" style="width:400px;height:300px;margin-right:20px" name="ddddd" id="iframes" scrolling="auto" src="/static/test.html?data=rtsp://192.168.1.111/live/mainstream"></iframe>
+		<iframe frameborder="no" border="0" style="width:400px;height:300px;" name="ddddd" id="iframes" scrolling="auto" src="/static/test.html?data=rtsp://192.168.1.112/live/mainstream"></iframe>
+		<iframe frameborder="no" border="0" style="width:400px;height:300px;" name="ddddd" id="iframes" scrolling="auto" src="/static/test.html?data=rtsp://192.168.1.114/live/mainstream"></iframe>
+		<iframe frameborder="no" border="0" style="width:400px;height:300px;" name="ddddd" id="iframes" scrolling="auto" src="/static/test.html?data=rtsp://192.168.1.135/live/mainstream"></iframe>
+	</div>
       </a-col>
 
       <a-col :md="10" :sm="10">
@@ -65,15 +71,13 @@
           </a-row>
 
            <!-- 测试 -->
-           <a-row :gutter="24">
-              <!-- <a-col :md="6" :sm="6" v-for="item in userInfoList" :key="item.id" @click="gotodetail(item.phone)"> -->
+           <!-- <a-row :gutter="24">
                 <a-carousel autoplay  style="background-color:#ccc;margin:0px 20px 20px 20px">
                    <div class="imgslide" v-for="item in userInfoList" :key="item.id">
                     <img :src="getAvatarView(item.avatar)" class="bottom_img" />
                 </div>
                 </a-carousel>
-              <!-- </a-col> -->
-            </a-row>
+            </a-row> -->
             <!-- 测试 -->
       <!--    <marquee-text>-->
             <a-row :gutter="24">
