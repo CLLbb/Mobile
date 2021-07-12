@@ -37,7 +37,7 @@
   import { mixin, mixinDevice } from '@/utils/mixin.js'
   import { triggerWindowResizeEvent } from '@/utils/util'
 
-  const indexKey = '/dashboard/analysis'
+  const indexKey = '/operate/user/userDate'
 
   export default {
     name: 'TabLayout',

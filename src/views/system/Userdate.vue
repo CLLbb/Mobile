@@ -17,43 +17,54 @@
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
             </span>
           </a-col>
-
         </a-row>
       </a-form>
     </div> -->
       <!-- 监控-begin -->
       <a-row :gutter="24">
         <a-col :md="24" :sm="24">
+          {{FlvPlayerList}}
           <!-- <p class="title1">实时监控</p> -->
           <div v-for="item in FlvPlayerList" :key="item.id" style="float: left">
             <div style="margin-right: 20px; margin-bottom: 20px">
               <p style="font-size: 16px; margin-bottom: 5px" class="svg_title">
                 <a-icon type="video-camera" class="svg_icon" /><span>{{ item.devicePosition }}</span>
               </p>
-              <iframe
-                style="width: 350px; height: 300px"
-                name="ddddd"
-                id="iframes"
-                scrolling="auto"
-                :src="`/static/test.html?data=rtsp://${item.rtspIp}/live/mainstream`"
-              ></iframe>
+              <video  
+                style="width: 350px; height: 300px;border:1px solid #ccc"
+                ref="monitorVideo" 
+                :data-video-rtsp="`rtsp://${item.rtspIp}/live/mainstream`"
+                :data-video-url="`${item.webrtcstreamerAddr}`">
+              </video>
             </div>
           </div>
         </a-col>
       </a-row>
     </a-card>
-   <div class="flex-1">
-    <div id="scroll-wrap">
+     <!-- 正常滚动版本 -->
+     <!-- <div id="scroll-wrap"  @click="gotodetail()">
       <ul class="scroll-ul">
-        <li class="scroll-li" v-for="item in userInfoList" :key="item.id"  @click="gotodetail(item.phone)">
+        <li class="scroll-li" v-for="item in userInfoList" :key="item.id">
+          <p>{{item.userName}}</p>
           <img :src="getAvatarView(item.avatar)"/>
+          <p class="time_img">{{item.orgEventTime}}</p>
         </li>
+      </ul>
+    </div> -->
+    <div id="scroll-wrap" @click="gotodetail()">
+      <ul class="scroll-ul">
+        <div v-for="item in userInfoList" :key="item.id">
+          <li class="scroll-li" >
+          <p>{{item.userName}}</p>
+          <img :src="getAvatarView(item.avatar)"/>
+          <p class="time_img">{{item.orgEventTime}}</p>
+        </li>
+        </div>
       </ul>
     </div>
   </div>
-  </div>
 </template>
-
+<script src="../public/js/webrtcstreamer.js"></script>
 <script>
 import UserModal from './modules/UserModalNew'
 import { getImgList, getAddressList } from '@/api/user'
@@ -65,7 +76,6 @@ import SysUserAgentModal from './modules/SysUserAgentModal'
 import JInput from '@/components/panther/JInput'
 import UserRecycleBinModal from './modules/UserRecycleBinModal'
 import MarqueeText from 'vue-marquee-text-component'
-
 import { getuserinfo } from '@/api/user'
 
 export default {
@@ -106,6 +116,8 @@ export default {
       userInfoList: [],
       FlvPlayerList: [],
       list: [],
+      phone:'',
+      webRtcServerList:[]
     }
   },
   computed: {
@@ -117,9 +129,12 @@ export default {
     window.clearInterval(this.timer)
     window.clearInterval(this.timer2)
     window.clearInterval(this.scrollTimer)
+     this.webRtcServerList.forEach(webRtcServer => {
+      webRtcServer.disconnect()
+    });
   },
   mounted() {
-    this.getinfo()
+    // this.getinfo()
     this.getimg()
     this.getinfo2()
     this.getaddress()
@@ -181,38 +196,57 @@ export default {
       getAddressList().then((res) => {
         let flv = res.result.records
         if (flv.length >= 4) {
-          this.FlvPlayerList = flv.slice(-4)
+          this.FlvPlayerList = flv.slice(-4);
+          console.log('FlvPlayerList',this.FlvPlayerList)
         } else {
           this.FlvPlayerList = flv.slice(0, 4)
-        }
-        console.log('流地址', res)
+        };
+        // ---回调函数延迟在下一次dom更新数据后调用---//
+        this.$nextTick(()=>{
+          // 获取渲染dom的集合
+         let monitorVideoDomArray= [...this.$refs.monitorVideo]
+        //  循环遍历返回webRtcServer
+         let webRtcServerList= monitorVideoDomArray.map(dom => {
+              let webRtcServer= new WebRtcStreamer(dom,dom.getAttribute('data-video-url'));
+    	        webRtcServer.connect(dom.getAttribute('data-video-rtsp'));
+              return webRtcServer
+         });
+         //  存储webRtcServer方便管理销毁
+         this.webRtcServerList = webRtcServerList
+     
+        })
       })
     },
 
-    getinfo() {
-      let num = 86
-      this.timer2 = setInterval(() => {
-        getuserinfo(num).then((res) => {
-          this.userdate = res.result
-          var strProduct = res.result.orderProduct
-          this.shopProduct = strProduct.split(',')
-          this.imgpath = res.result.avatar
-        })
-      }, 3000)
-    },
+    // getinfo() {
+    //   let num = 86
+    //   this.timer2 = setInterval(() => {
+    //     getuserinfo(num).then((res) => {
+    //       this.userdate = res.result
+    //       var strProduct = res.result.orderProduct
+    //       this.shopProduct = strProduct.split(',')
+    //       this.imgpath = res.result.avatar
+    //     })
+    //   }, 3000)
+    // },
 
     getinfo2() {
       getImgList().then((res) => {
-        this.userInfoList = res.result.records.slice(0, 4)
-        this.userdate2 = res.result.records[0]
-        var strProduct = res.result.records[0].orderProduct
+        var data=res.result;
+        this.phone=res.result.records[0].phone
+        this.userInfoList = data.records.slice(0, 4)
+        this.userdate2 = data.records[0]
+        var strProduct = data.records[0].orderProduct
         this.shopProduct = strProduct.split(',')
+        this.phone=res.result.records[0].phone
+        console.log('phone的值',res.result);
       })
     },
 
     // 跳转到详情界面
-    gotodetail(phone) {
-      console.log('phone',123);
+    gotodetail() {
+      var phone=this.phone;
+      console.log('phone的值',this.phone);
       this.$router.push({
         path: '/operate/user/getById',
         query: {
@@ -352,9 +386,9 @@ export default {
 }
 
 #scroll-wrap {
-  width: 800px;
-  height: 200px;
-  margin: 100px auto;
+  width: 100%;
+  height: 216px;
+  margin: 10px 80px;
   position: relative;
   /* background: red; */
   overflow: hidden;
@@ -372,6 +406,14 @@ export default {
   height: 200px;
   list-style: none;
   margin: 0px 20px;
+  cursor: pointer;
+  text-align: center;
+}
+#scroll-wrap ul li p{
+  margin: 10px 0px;
+}
+#scroll-wrap ul li .time_img{
+  margin-top: 0px;
 }
 #scroll-wrap ul li img {
   width: 200px;

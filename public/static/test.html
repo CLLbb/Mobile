@@ -1,35 +1,37 @@
 <html>
-
-<head>
-	<script src="js/webrtcstreamer.js"></script>
-	<script>
-
-		window.onload = function () {
-			// 接受从vue组件中传过来的参数
-			var url = location.search; //这一条语句获取了包括问号开始到参数的最后，不包括前面的路径
-			var params = url.substr(1); //去掉问号
-			var pa = params.split("&");
-			var s = new Object();
-			for (var i = 0; i < pa.length; i++) {
-				const url = unescape(pa[i].split("=")[1]);
-				// console.log(pa);
-
-				// webRtcServer = new WebRtcStreamer("video", "http://192.168.1.134:8000");
-				const resultUrl = url.replace('rtsp','http')
-				console.log(resultUrl);
-				webRtcServer = new WebRtcStreamer("video",resultUrl);
-				webRtcServer.connect(s.data);
-			}
+	<head>
+		<script src="js/webrtcstreamer.js"></script>
+		<script>
+		window.onload = ()=>{
+			// const webrtcstreamerAddr = document.getElementById('myiframe').contentwindow.dataset.webrtcstreamerAddr
+			const webrtcstreamerAddr = document.getElementsByTagName('iframe')
+			console.log(webrtcstreamerAddr);
 		}
-		window.onbeforeunload = function () {
-			webRtcServer.disconnect();
-		}
-	</script>
-</head>
+			// var url = location.search; 
+			// var params = url.substr(1); 
+			// var pa = params.split("&");
+			// var s = new Object();
+			// for (var i = 0; i < pa.length; i++) {
+			// 	s[pa[i].split("=")[0]] = unescape(pa[i].split("=")[1]);
+			// }
+			// const s = params.split('=')[1]
+			// console.log(JSON.parse(s));
+			// const rtspIp = s.rtspIp
+			// const webrtcstreamerAddr = `${s.webrtcstreamerAddr}`
 
-<body>
-	<h1 value="da3"></h1>
-	<video id="video" style="width: 100%;height: 100%;" />
-</body>
-
+			// window.onload = function() {
+			// 	webRtcServer = new WebRtcStreamer("video", "http://192.168.1.102:8000");
+			// 	// webRtcServer = new WebRtcStreamer("video", rtspIp);
+			// 	webRtcServer.connect(s.data);
+			// 	// webRtcServer.connect(webrtcstreamerAddr);
+			// }
+			// window.onbeforeunload = function() {
+			// 	webRtcServer.disconnect();
+			// }
+		</script>
+	</head>
+	<body>
+		<h1 value="da3"></h1>
+		<video id="video" style="width: 100%;height: 100%;" />
+	</body>
 </html>

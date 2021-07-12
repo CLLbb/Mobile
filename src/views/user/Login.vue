@@ -335,7 +335,7 @@
         // update-begin- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
         // this.loginBtn = false
         // update-end- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
-        this.$router.push({ path: "/dashboard/analysis" }).catch(()=>{
+        this.$router.push({ path: "/operate/user/userDate" }).catch(()=>{
           console.log('登录跳转首页出错,这个错误从哪里来的')
         })
         this.$notification.success({
