@@ -20,8 +20,20 @@
 
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
-        <a-form-item label="摄像头名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <!-- <a-form-item label="摄像头名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input placeholder="请输入摄像头名称" v-decorator.trim="['deviceName', validatorRules.deviceName]" />
+        </a-form-item> -->
+        <a-form-item label="摄像头名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-select
+           v-decorator.trim="['name', validatorRules.name]"
+            style="width: 100%"
+            placeholder="请选择摄像头名称"
+            :getPopupContainer="(target) => target.parentNode"
+          >
+            <a-select-option v-for="(role, roleindex) in deviceList" :key="roleindex.toString()" :value="role.name">
+              {{role.name}}
+            </a-select-option>
+          </a-select>
         </a-form-item>
         <a-form-item label="摄像头安装位置" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input placeholder="请输入摄像头安装位置" v-decorator="['devicePosition', validatorRules.devicePosition]" />
@@ -68,8 +80,10 @@ export default {
     departWindow,
     JSelectPosition,
   },
+  props: ['deviceList'],
   data() {
     return {
+      snList:[],
       departDisabled: false, //是否是我的部门调用该页面
       roleDisabled: false, //是否是角色维护调用该页面
       modalWidth: 800,
@@ -223,7 +237,7 @@ export default {
         that.form.setFieldsValue(
           pick(
             this.model,
-            'deviceName',
+            'name',
             'devicePosition',
             'webrtcstreamerAddr',
             'rtspIp',

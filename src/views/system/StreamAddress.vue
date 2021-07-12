@@ -104,11 +104,11 @@
     </div>
     <!-- table区域-end -->
 
-    <user-modal  ref="modalForm" @ok="modalFormOk"></user-modal>
+    <user-modal  ref="modalForm" @ok="modalFormOk" :deviceList="deviceList"></user-modal>
 
-    <password-modal ref="passwordmodal" :phoneList='phoneList' :roleList="roleList" @ok="passwordModalOk"></password-modal>
+    <!-- <password-modal ref="passwordmodal" :phoneList='phoneList' :roleList="roleList" @ok="passwordModalOk"></password-modal>
 
-    <sys-user-agent-modal ref="sysUserAgentModal" :roleList="roleList"></sys-user-agent-modal>
+    <sys-user-agent-modal ref="sysUserAgentModal" :roleList="roleList"></sys-user-agent-modal> -->
 
     <!-- 用户回收站 -->
     <user-recycle-bin-modal :visible.sync="recycleBinVisible" @ok="modalFormOk"/>
@@ -125,7 +125,7 @@
   import SysUserAgentModal from "./modules/Drop";
   import JInput from '@/components/panther/JInput'
   import UserRecycleBinModal from './modules/UserRecycleBinModal'
-  import {getAddressList,getVisiterlist,deleAddress,searchAddress} from '@/api/user'
+  import {getAddressList,deviceList,deleAddress,searchAddress,deviceListUser} from '@/api/user'
 
   export default {
     name: "UserList",
@@ -142,7 +142,7 @@
         // 批量下发数据
         phoneList:[],
         searchdate:'',
-        roleList:[],
+        deviceList:[],
         description: '这是获取视频流地址页面',
         queryParam: {},
         recycleBinVisible: false,
@@ -151,7 +151,7 @@
             title: '设备名称',
             align: "center",
             width: 80,
-            dataIndex: 'deviceName',
+            dataIndex: 'name',
           },
           {
             title: '设备位置',
@@ -195,7 +195,8 @@
       },
     },
     mounted(){
-      this.getAddress()
+      this.getAddress(),
+       this.deviceList2()
     },
     methods: {
       getAvatarView: function (avatar) {
@@ -215,6 +216,13 @@
       getAddress(){
         getAddressList().then(res=>{
           this.dataSource=res.result.records
+        })
+      },
+       // 获取设备列表
+      deviceList2(){
+        deviceListUser().then(res=>{
+          this.deviceList=res.result.records;
+          console.log('设备列表',res)
         })
       },
 
