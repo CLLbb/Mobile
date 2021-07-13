@@ -72,7 +72,7 @@ export function deviceListUser() {
   })
 }
 
-// 获取图片信息
+// 实时数据信息
 export function getImgList() {
   return axios({
     url: '/operate/accessLog/list',

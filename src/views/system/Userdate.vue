@@ -22,16 +22,27 @@
     </div> -->
       <!-- 监控-begin -->
       <a-row :gutter="24">
-        <a-col :md="24" :sm="24">
-          {{FlvPlayerList}}
+        <a-col :md="6" :sm="6" class='left_card'>
+          <a-row :gutter="24" v-for='item in userInfoList' :key="item.index"  class="img_left">
+              <a-col :md="6" :sm="6">
+              <img :src="getAvatarView(item.avatar)"/>
+              </a-col>
+              <a-col :md="10" :sm="10">
+                <div><p style="font-size:20px" >{{item.phone}}</p><p>{{item.userName}}</p></div>
+                <p><span>顾客套餐</span>  近三月消费{{item.consu3Month}}</p>
+              </a-col>
+          </a-row>
+        </a-col>
+        <!-- 视频区域 -->
+        <a-col :md="16" :sm="16" class='right_card'>
           <!-- <p class="title1">实时监控</p> -->
-          <div v-for="item in FlvPlayerList" :key="item.id" style="float: left">
+          <div v-for="item in FlvPlayerList" :key="item.id" style="float:left">
             <div style="margin-right: 20px; margin-bottom: 20px">
               <p style="font-size: 16px; margin-bottom: 5px" class="svg_title">
                 <a-icon type="video-camera" class="svg_icon" /><span>{{ item.devicePosition }}</span>
               </p>
               <video  
-                style="width: 350px; height: 300px;border:1px solid #ccc"
+                style="width: 400px; height: 300px; margin-top:-10px"
                 ref="monitorVideo" 
                 :data-video-rtsp="`rtsp://${item.rtspIp}/live/mainstream`"
                 :data-video-url="`${item.webrtcstreamerAddr}`">
@@ -41,17 +52,8 @@
         </a-col>
       </a-row>
     </a-card>
-     <!-- 正常滚动版本 -->
-     <!-- <div id="scroll-wrap"  @click="gotodetail()">
-      <ul class="scroll-ul">
-        <li class="scroll-li" v-for="item in userInfoList" :key="item.id">
-          <p>{{item.userName}}</p>
-          <img :src="getAvatarView(item.avatar)"/>
-          <p class="time_img">{{item.orgEventTime}}</p>
-        </li>
-      </ul>
-    </div> -->
-    <div id="scroll-wrap" @click="gotodetail()">
+     <!-- 滚动版本 -->
+    <!-- <div id="scroll-wrap" @click="gotodetail()">
       <ul class="scroll-ul">
         <div v-for="item in userInfoList" :key="item.id">
           <li class="scroll-li" >
@@ -61,7 +63,7 @@
         </li>
         </div>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 <script src="../public/js/webrtcstreamer.js"></script>
@@ -136,61 +138,61 @@ export default {
   mounted() {
     // this.getinfo()
     this.getimg()
-    this.getinfo2()
+    // this.getinfo2()
     this.getaddress()
-   setTimeout(() => {
-      this.init()
-    }, 3000)
+  //  setTimeout(() => {
+  //     this.init()
+  //   }, 3000)
   },
   methods: {
     // 滚动部分js
-   init() {
-     const _this = this
-      this.$nextTick(() => {
-        var oDiv = document.getElementById('scroll-wrap')
-        var oUl = oDiv.getElementsByClassName('scroll-ul')[0]
-        var aLi = oUl.getElementsByClassName('scroll-li')
+  //  init() {
+  //    const _this = this
+  //     this.$nextTick(() => {
+  //       var oDiv = document.getElementById('scroll-wrap')
+  //       var oUl = oDiv.getElementsByClassName('scroll-ul')[0]
+  //       var aLi = oUl.getElementsByClassName('scroll-li')
 
-        var speed = 2
+  //       var speed = 2
 
-        oUl.innerHTML += oUl.innerHTML
-        oUl.style.width = aLi[0].offsetWidth * aLi.length + 'px'
+  //       oUl.innerHTML += oUl.innerHTML
+  //       oUl.style.width = aLi[0].offsetWidth * aLi.length + 'px'
 
-        function move() {
-          if (oUl.offsetLeft < -oUl.offsetWidth / 2) {
-            oUl.style.left = '0'
-          }
-          if (oUl.offsetLeft > 0) {
-            oUl.style.left = -oUl.offsetWidth / 2 + 'px'
-          }
-          oUl.style.left = oUl.offsetLeft + speed + 'px'
-        }
+  //       function move() {
+  //         if (oUl.offsetLeft < -oUl.offsetWidth / 2) {
+  //           oUl.style.left = '0'
+  //         }
+  //         if (oUl.offsetLeft > 0) {
+  //           oUl.style.left = -oUl.offsetWidth / 2 + 'px'
+  //         }
+  //         oUl.style.left = oUl.offsetLeft + speed + 'px'
+  //       }
 
-        var scrollTimer = setInterval(move, 30)
-        oDiv.onmousemove = function() {
-          clearInterval(scrollTimer)
-        }
-        oDiv.onmouseout = function() {
-          scrollTimer = setInterval(move, 30);
-        }
-        aLi.onclick=function(){
-          console.log('点击');
-        }
-      })
-    },
-    move() {
-      console.log('move')
-      var oUl = document.getElementsByClassName('scorll-ul')[0]
-      const speed = 0.6
+  //       var scrollTimer = setInterval(move, 30)
+  //       oDiv.onmousemove = function() {
+  //         clearInterval(scrollTimer)
+  //       }
+  //       oDiv.onmouseout = function() {
+  //         scrollTimer = setInterval(move, 30);
+  //       }
+  //       aLi.onclick=function(){
+  //         console.log('点击');
+  //       }
+  //     })
+  //   },
+  //   move() {
+  //     console.log('move')
+  //     var oUl = document.getElementsByClassName('scorll-ul')[0]
+  //     const speed = 0.6
 
-      if (oUl.offsetLeft < -oUl.offsetWidth / 2) {
-        oUl.style.left = '0'
-      }
-      if (oUl.offsetLeft > 0) {
-        oUl.style.left = -oUl.offsetWidth / 2 + 'px'
-      }
-      oUl.style.left = oUl.offsetLeft + speed + 'px'
-    },
+  //     if (oUl.offsetLeft < -oUl.offsetWidth / 2) {
+  //       oUl.style.left = '0'
+  //     }
+  //     if (oUl.offsetLeft > 0) {
+  //       oUl.style.left = -oUl.offsetWidth / 2 + 'px'
+  //     }
+  //     oUl.style.left = oUl.offsetLeft + speed + 'px'
+  //   },
     // 视频流地址
     getaddress() {
       getAddressList().then((res) => {
@@ -230,36 +232,35 @@ export default {
     //   }, 3000)
     // },
 
-    getinfo2() {
-      getImgList().then((res) => {
-        var data=res.result;
-        this.phone=res.result.records[0].phone
-        this.userInfoList = data.records.slice(0, 4)
-        this.userdate2 = data.records[0]
-        var strProduct = data.records[0].orderProduct
-        this.shopProduct = strProduct.split(',')
-        this.phone=res.result.records[0].phone
-        console.log('phone的值',res.result);
-      })
-    },
+    // getinfo2() {
+    //   getImgList().then((res) => {
+    //     var data=res.result;
+    //     this.phone=res.result.records[0].phone
+    //     this.userInfoList = data.records.slice(0, 4)
+    //     this.userdate2 = data.records[0]
+    //     var strProduct = data.records[0].orderProduct
+    //     this.shopProduct = strProduct.split(',')
+    //     this.phone=res.result.records[0].phone
+    //   })
+    // },
 
     // 跳转到详情界面
-    gotodetail() {
-      var phone=this.phone;
-      console.log('phone的值',this.phone);
-      this.$router.push({
-        path: '/operate/user/getById',
-        query: {
-          key: 'key',
-          msgKey: phone,
-        },
-      })
-    },
+    // gotodetail() {
+    //   var phone=this.phone;
+    //   console.log('phone的值',this.phone);
+    //   this.$router.push({
+    //     path: '/operate/user/getById',
+    //     query: {
+    //       key: 'key',
+    //       msgKey: phone,
+    //     },
+    //   })
+    // },
     getimg() {
       this.timer = setInterval(() => {
         getImgList().then((res) => {
           // this.userInfoList = res.result.records.slice(0, 4)
-          this.userInfoList = res.result.records
+          this.userInfoList = res.result.records.slice(0, 6)
           this.userdate2 = res.result.records[0]
         })
       }, 3000)
@@ -363,13 +364,11 @@ export default {
   background-size: cover;
 }
 
-.top_img {
-  width: 150px;
-  height: 150px;
-  background-size: cover;
-  border-radius: 10px;
-  position: absolute;
-  left: 200px;
+.img_left img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px; 
+  margin-bottom: 20px;
 }
 
 .single_info {
@@ -379,6 +378,19 @@ export default {
 .img {
   text-align: center;
 }
+/* 左边卡片 */
+.left_card{
+  background-color: #f5f9fe;
+  margin: 0px 20px;
+  padding:10px 20px;
+  box-shadow: 10px 5px 5px rgba(204, 203, 245, 0.3);
+}
+/* .right_card{
+  background-color: #f5f9fe;
+  margin: 0px 20px;
+  padding:10px 20px;
+  box-shadow: 10px 5px 5px rgba(204, 203, 245, 0.3);
+} */
 /* 滚动部分样式 */
 * {
   margin: 0;

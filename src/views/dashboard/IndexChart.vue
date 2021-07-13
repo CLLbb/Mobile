@@ -2,7 +2,8 @@
   <div class="page-header-index-wide">
 
     <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
-      <div class="salesCard">
+      <h1 class="h1">欢迎使用中移CMCC智慧运营统一平台</h1>
+      <!-- <div class="salesCard">
         <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
           <div class="extra-wrapper" slot="tabBarExtraContent">
             <div class="extra-item">
@@ -11,7 +12,6 @@
               <a @click="initLogInfo(3)">本月</a>
               <a @click="initLogInfo(4)">本年</a>
             </div>
-<!--            <a-range-picker :style="{width: '256px'}" />-->
           </div>
 
           <a-tab-pane loading="true" tab="" key="1">
@@ -43,7 +43,7 @@
           </a-tab-pane>
 
         </a-tabs>
-      </div>
+      </div> -->
     </a-card>
 
   </div>
@@ -186,5 +186,11 @@
         font-size: 1rem;
       }
     }
+  // .ant-card{
+  //   height: 100vh;
+  //   }
+  h1{
+    text-align: center;
+}
   }
 </style>
